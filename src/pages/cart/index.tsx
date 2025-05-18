@@ -6,7 +6,6 @@ import { Add, Remove } from "@mui/icons-material";
 import styles from "./index.module.scss";
 import Header from "../../components/header";
 
-// Mock cart items for demonstration
 const mockCartItems = [
   {
     id: 5,
