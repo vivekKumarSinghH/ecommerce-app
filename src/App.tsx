@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Categories from "./pages/categories";
 import CategoryProducts from "./pages/categoryProducts";
 import ProductDetail from "./pages/productDetail";
+import Cart from "./pages/cart";
+import OrderPlaced from "./pages/orderPlaced";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
             path="/categories/:category/:productId"
             element={<ProductDetail />}
           />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/order-placed" element={<OrderPlaced />} />
         </Routes>
       </div>
     </Router>
