@@ -1,5 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import Categories from "./pages/categories"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Categories from "./pages/categories";
+import CategoryProducts from "./pages/categoryProducts";
 
 function App() {
   return (
@@ -8,10 +9,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Categories />} />
           <Route path="/categories" element={<Categories />} />
+          <Route path="/categories/:category" element={<CategoryProducts />} />
         </Routes>
       </div>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;
