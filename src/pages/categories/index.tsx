@@ -1,22 +1,29 @@
-import type { FC } from "react"
-import { useNavigate } from "react-router-dom"
-import styles from "./index.module.scss"
-import Header from "../../components/header"
+"use client";
+
+import { useEffect, type FC } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./index.module.scss";
+import Header from "../../components/header";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { fetchCategories } from "../../redux/reducers/categoriesReducer";
 
 const Categories: FC = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const categories = [
-    { id: 1, name: "Hoodies", image: "/cozy-hoodie.png" },
-    { id: 2, name: "Accessories", image: "/stylish-sunglasses.png" },
-    { id: 3, name: "Shorts", image: "/various-shorts.png" },
-    { id: 4, name: "Shoes", image: "/diverse-sneaker-collection.png" },
-    { id: 5, name: "Bags", image: "/placeholder-384q6.png" },
-  ]
+  const {
+    items: categories,
+    loading,
+    error,
+  } = useAppSelector((state) => state.categories);
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
   const handleCategoryClick = (categoryName: string) => {
-    navigate(`/categories/${categoryName.toLowerCase()}`)
-  }
+    navigate(`/categories/${categoryName}`);
+  };
 
   return (
     <>
@@ -25,19 +32,28 @@ const Categories: FC = () => {
       <div className={styles.content}>
         <h1 className={styles.title}>Shop by Categories</h1>
 
-        <div className={styles.categoriesList}>
-          {categories.map((category) => (
-            <div key={category.id} className={styles.categoryCard} onClick={() => handleCategoryClick(category.name)}>
-              <div className={styles.categoryImageContainer}>
-                <img src={ "/vite.svg"} alt={category.name} className={styles.categoryImage} />
+        {loading && <div className={styles.loading}>Loading categories...</div>}
+
+        {error && <div className={styles.error}>Error: {error}</div>}
+
+        {!loading && !error && (
+          <div className={styles.categoriesList}>
+            {categories.map((category, index) => (
+              <div
+                key={index}
+                className={styles.categoryCard}
+                onClick={() => handleCategoryClick(category)}
+              >
+                <div className={styles.categoryName}>
+                  {category.charAt(0).toUpperCase() + category.slice(1)}
+                </div>
               </div>
-              <div className={styles.categoryName}>{category.name}</div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Categories
+export default Categories;
