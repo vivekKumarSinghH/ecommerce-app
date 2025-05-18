@@ -16,14 +16,12 @@ interface ProductsState {
   error: string | null;
 }
 
-// Initial state
 const initialState: ProductsState = {
   items: [],
   loading: false,
   error: null,
 };
 
-// Async thunk to fetch products by category
 export const fetchProductsByCategory = createAsyncThunk(
   "products/fetchProductsByCategory",
   async (category: string, { rejectWithValue }) => {

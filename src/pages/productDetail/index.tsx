@@ -5,6 +5,7 @@ import styles from "./index.module.scss";
 import Header from "../../components/header";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchProductById } from "../../redux/reducers/productDetailReducer";
+import { addToCart } from "../../redux/reducers/cartReducer";
 
 const ProductDetail: FC = () => {
   const { category, productId } = useParams<{
@@ -40,6 +41,7 @@ const ProductDetail: FC = () => {
 
   const handleAddToBag = () => {
     if (product && category) {
+      dispatch(addToCart({ product, quantity }));
       navigate(`/categories/${category}`);
     }
   };
@@ -57,7 +59,6 @@ const ProductDetail: FC = () => {
       <Header
         title={category && formatCategoryName(category)}
         showBackButton={true}
-        cartItemCount={2}
       />
 
       <div className={styles.content}>

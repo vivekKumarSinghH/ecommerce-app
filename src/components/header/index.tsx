@@ -2,21 +2,24 @@ import type { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { ShoppingCart, ArrowBack } from "@mui/icons-material";
 import styles from "./index.module.scss";
+import { useAppSelector } from "../../redux/hooks";
 
 interface HeaderProps {
   title?: string;
   showBackButton?: boolean;
-  cartItemCount?: number;
+  hideCartIcon?: boolean;
   onCartClick?: () => void;
 }
 
 const Header: FC<HeaderProps> = ({
   title,
   showBackButton = false,
-  cartItemCount = 0,
+  hideCartIcon = false,
   onCartClick,
 }) => {
   const navigate = useNavigate();
+
+  const cartItemCount = useAppSelector((state) => state.cart.totalItems);
 
   const handleBackClick = () => {
     navigate(-1);
@@ -43,12 +46,14 @@ const Header: FC<HeaderProps> = ({
       {title && <h2 className={styles.title}>{title}</h2>}
 
       <div className={styles.rightSection}>
-        <div className={styles.cartIcon} onClick={handleCartClick}>
-          <ShoppingCart />
-          {cartItemCount > 0 && (
-            <span className={styles.cartBadge}>{cartItemCount}</span>
-          )}
-        </div>
+        {!hideCartIcon && (
+          <div className={styles.cartIcon} onClick={handleCartClick}>
+            <ShoppingCart />
+            {cartItemCount > 0 && (
+              <span className={styles.cartBadge}>{cartItemCount}</span>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

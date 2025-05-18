@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, type FC } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./index.module.scss";
@@ -18,7 +16,6 @@ const CategoryProducts: FC = () => {
     error,
   } = useAppSelector((state) => state.products);
 
-  // Fetch products when component mounts or category changes
   useEffect(() => {
     if (category) {
       dispatch(fetchProductsByCategory(category));
@@ -40,7 +37,7 @@ const CategoryProducts: FC = () => {
 
   return (
     <>
-      <Header showBackButton={true} cartItemCount={2} />
+      <Header showBackButton={true} />
 
       <div className={styles.content}>
         {loading && <div className={styles.loading}>Loading products...</div>}

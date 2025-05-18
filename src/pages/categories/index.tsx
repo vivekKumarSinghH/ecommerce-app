@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, type FC } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./index.module.scss";
@@ -27,7 +25,7 @@ const Categories: FC = () => {
 
   return (
     <>
-      <Header cartItemCount={2} />
+      <Header />
 
       <div className={styles.content}>
         <h1 className={styles.title}>Shop by Categories</h1>
