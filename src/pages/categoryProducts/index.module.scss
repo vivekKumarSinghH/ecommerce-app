@@ -42,6 +42,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 8px;
 
   img {
     width: 100%;
@@ -58,13 +59,13 @@
   font-size: 14px;
   font-weight: 500;
   color: #333;
-  margin-bottom: 8px;
+  margin: 0 0 4px 0;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 40px;
+  white-space: nowrap;
 }
 
 .productPrice {
@@ -72,4 +73,20 @@
   font-weight: 600;
   color: #333;
   margin: 0;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+  color: #666;
+  font-size: 16px;
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+  color: #ff4d4f;
+  font-size: 16px;
 }
